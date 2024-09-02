@@ -26,11 +26,13 @@ def tools():
                         },
                         "latitude": {
                             "type": "number",
-                            "description": "The latitude in proximity of the hotel's location. If provided, a corresponding latitude should be also be provided."
+                            "description": "The latitude in proximity of the hotel's location. If provided, "
+                                           "a corresponding longitude should be also be provided."
                         },
                         "longitude": {
                             "type": "number",
-                            "description": "The latitude in proximity of the hotel's location. If provided, a corresponding latitude should be also be provided."
+                            "description": "The latitude in proximity of the hotel's location. If provided, "
+                                           "a corresponding latitude should be also be provided."
                         }
                     },
                     "required": [],

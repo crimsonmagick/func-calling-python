@@ -1,9 +1,13 @@
-from hotels import hotel_repository, room_inventory_repository
+from typing import List
+
+from hotels import hotel_repository, room_inventory_repository, reservation_service
 from hotels.bed_type import BedType
+from hotels.room_inventory import RoomInventory
 
 if __name__ == '__main__':
 
-    anHotel = hotel_repository().get(123)
+    an_hotel = hotel_repository().get(123)
+    print(f"an_hotel: {an_hotel}")
     hotels = hotel_repository().search(city="Phoenix")
     hotel_id = None
     for hotel in hotels:
@@ -12,6 +16,10 @@ if __name__ == '__main__':
         break
 
     if hotel_id is not None:
-        # inventory = room_inventory_repository().get_room_inventory(hotel_id, 0)
-        for inventory in room_inventory_repository().search_room_inventory(hotel_id, bed_type=BedType.QUEEN):
-            print(inventory)
+        inventory_results: List[RoomInventory] = (
+            room_inventory_repository()
+            .search_room_inventory(hotel_id,
+                                   bed_type=BedType.QUEEN))
+        if inventory_results:
+            reservation = reservation_service().reserve(hotel_id, inventory_results[0].sequence_number)
+            print(reservation)
